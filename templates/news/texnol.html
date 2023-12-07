@@ -1,0 +1,38 @@
+{% extends "news/base.html" %}
+{% block title %}Texnologiya Yangiliklar{% endblock %}
+{% block content %}
+<body>
+    <div class="container">
+    <div class="single_post_content">
+        <h2><span>Texnologiya Yangiliklar</span></h2>
+        <div class="single_post_content_left">
+            <ul class="business_catgnav  wow fadeInDown">
+                {% for texnologiya_one in texnologiya_yangiliklar %}
+                  {% if forloop.counter == 1%}
+                    <li>
+                      <figure class="bsbig_fig"> <a href="{{texnologiya_one.get_absolute_url}}" class="featured_img"> <img alt="" src="{{ texnologiya_one.image.url }}"> <span class="overlay"></span> </a>
+                      <figcaption> <a href="{{texnologiya_one.get_absolute_url}}">{{ texnologiya_one.title }}</a> </figcaption>
+                      <p>{{ texnologiya_one.body | truncatewords:5 }}</p>
+                      </figure>
+                    </li>
+                  {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="single_post_content_right">
+            <ul class="spost_nav">
+                {% for texnologiya_new in texnologiya_yangiliklar %}
+                {% if forloop.counter > 1%}
+                <li>
+                  <div class="media wow fadeInDown"> <a href="{{texnologiya_new.get_absolute_url}}" class="media-left"> <img alt="" src="{{ texnologiya_new.image.url }}"> </a>
+                    <div class="media-body"> <a href="{{texnologiya_new.get_absolute_url}}" class="catg_title">{{ texnologiya_new.title }}</a> </div>
+                  </div>
+                </li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+{% endblock %}

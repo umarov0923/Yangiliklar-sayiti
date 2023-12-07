@@ -1,0 +1,38 @@
+{% extends "news/base.html" %}
+{% block title %}Mahaliy Yangiliklar{% endblock %}
+{% block content %}
+<body>
+<div class="container">
+    <div class="single_post_content">
+        <h2><span>Mahaliy</span></h2>
+        <div class="single_post_content_left">
+            <ul class="business_catgnav  wow fadeInDown">
+                {% for mahaliy_one in mahaliy_yangiliklar %}
+                  {% if forloop.counter == 1%}
+                    <li>
+                      <figure class="bsbig_fig"> <a href="{{mahaliy_one.get_absolute_url}}" class="featured_img"> <img alt="" src="{{ mahaliy_one.image.url }}"> <span class="overlay"></span> </a>
+                      <figcaption> <a href="{{mahaliy_one.get_absolute_url}}">{{ mahaliy_one.title }}</a> </figcaption>
+                      <p>{{ mahaliy_one.body | truncatewords:5 }}</p>
+                      </figure>
+                    </li>
+                  {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="single_post_content_right">
+            <ul class="spost_nav">
+                {% for mahaliy_new in mahaliy_yangiliklar %}
+                {% if forloop.counter > 1%}
+                <li>
+                  <div class="media wow fadeInDown"> <a href="{{mahaliy_new.get_absolute_url}}" class="media-left"> <img alt="" src="{{ mahaliy_new.image.url }}"> </a>
+                    <div class="media-body"> <a href="{{mahaliy_new.get_absolute_url}}" class="catg_title">{{ mahaliy_new.title }}</a> </div>
+                  </div>
+                </li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+{% endblock %}
