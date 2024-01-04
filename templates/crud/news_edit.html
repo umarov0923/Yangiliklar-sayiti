@@ -1,0 +1,14 @@
+{% extends "news/base.html" %}
+{% block title %}{{new.title}}{% endblock %}
+{% block content %}
+<body>
+    <div class="container">
+        <h2>{{news.title}}</h2>
+        <form method="post">{% csrf_token %}
+            {{form.as_p}}
+            <button type="submit"> Yangilash</button>
+        </form>
+    </div>
+
+</body>
+{% endblock %}

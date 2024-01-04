@@ -1,10 +1,65 @@
 {% extends "news/base.html" %}
+{% load hitcount_tags %}
+{% block title %}{{new.title}}{% endblock %}
 {% block content %}
 <body>
     <div class="container">
         <h1>{{new.title}}</h1>
+        <h3>{{new.publish_time}} | <i class="fa fa-eye" aria-hidden="true"></i> {% get_hit_count for new %}</h3>
         <img src="{{ new.image.url }}" alt="">
         <p>{{new.body}}</p>
+        {% if request.user.is_superuser %}
+        <a href="{% url 'new_update' new.slug %}" >Tahrirlash</a> |
+        <a href="{% url 'new_delet' new.slug %}">Ochirish</a>
+        {% endif %}
+        <section style="background-color: #eee;">
+  <div class="container my-5 py-5">
+    <div class="row d-flex justify-content-center">
+      <div class="col-md-12 col-lg-10 col-xl-8">
+        <div class="card">
+            {% if comments %}
+            <h2>Bu yangilikga {{comment_count}} ta izoh qoldirilgan</h2>
+            {% endif %}
+            {% for comment in comments %}
+          <div class="card-body">
+            <div class="d-flex flex-start align-items-center">
+              <img class="rounded-circle shadow-1-strong me-3"
+                src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(19).webp" alt="avatar" width="60"
+                height="60" />
+              <div>
+                <h6 class="fw-bold text-primary mb-1">{{comment.user}}</h6>
+                <p class="text-muted small mb-0">
+                  {{comment.created_time}}
+                </p>
+              </div>
+            </div>
+            <p class="mt-3 mb-4 pb-2">
+              {{comment.body}}
+            </p>
+          </div>
+            {% endfor %}
+          <div class="card-footer py-3 border-0" style="background-color: #f8f9fa;">
+              <form method="post">{% csrf_token %}
+                   <div class="d-flex flex-start w-100">
+              <img class="rounded-circle shadow-1-strong me-3"
+                src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(19).webp" alt="avatar" width="40"
+                height="40" />
+              <div class="form-outline w-100">
+                  {{comment_form.as_p}}
+                <label class="form-label" for="textAreaExample">Message</label>
+              </div>
+               <div class="float-end mt-2 pt-1">
+              <button type="submit" class="btn btn-primary btn-sm">Post comment</button>
+              <button type="button" class="btn btn-outline-primary btn-sm">Cancel</button>
+               </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
     </div>
 
 </body>

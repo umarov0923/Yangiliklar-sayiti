@@ -1,0 +1,14 @@
+{% extends "news/base.html" %}
+{% block title %}{{new.title}}{% endblock %}
+{% block content %}
+<body>
+    <div class="container">
+        <h2>Qiduruv boyicha natijalar</h2>
+        {% for new in search_result %}
+        <h3><a href="{% url 'new_item' new.slug %}">{{new.title}}</a></h3>
+        <p>{{new.body | truncatewords:10}}</p>
+        {% endfor %}
+    </div>
+
+</body>
+{% endblock %}

@@ -1,6 +1,6 @@
 {% extends "news/base.html" %}
 {% load static %}
-
+{% load hitcount_tags %}
 {% block title %}Asosiy sahifa{% endblock %}
 {% block content %}
 <body>
@@ -21,6 +21,12 @@
             </ul>
           </div>
           <div class="header_top_right">
+              {% if request.user.is_authenticated %}
+                  <p><a href="{% url 'logout' %}" style="color:yellow">Logout</a></p>
+                  <p><a href="{% url 'user_profile' %}" style="color:red">My profile</a></p>
+              {% else %}
+              <p><a href="{% url 'login' %}" style="color:red">Saytga kirish</a></p>
+            {% endif %}
             <p>{% now "jS F Y H:i" %}</p>
           </div>
         </div>
@@ -57,8 +63,11 @@
               {% for new in new_list %}
               <li>
                 <div class="media"> <a href="{{new.get_absolute_url}}" class="media-left"> <img alt="" src="{{ new.image.url }}"> </a>
-                  <div class="media-body"> <a href="{{new.get_absolute_url}}" class="catg_title">{{ new.title }}</a> </div>
+                  <div class="media-body"> <a href="{{new.get_absolute_url}}" class="catg_title">{{ new.title }}</a>
+                     <p>Ko'rilganlar soni: <i class="fa fa-eye" aria-hidden="true"></i> {% get_hit_count for new %}</p>
+                  </div>
                 </div>
+
               </li>
               {% endfor %}
             </ul>
@@ -81,6 +90,7 @@
                     <li>
                       <figure class="bsbig_fig"> <a href="{{mahaliy_one.get_absolute_url}}" class="featured_img"> <img alt="" src="{{ mahaliy_one.image.url }}"> <span class="overlay"></span> </a>
                       <figcaption> <a href="{{mahaliy_one.get_absolute_url}}">{{ mahaliy_one.title }}</a> </figcaption>
+                         <p>Ko'rilganlar soni: <i class="fa fa-eye" aria-hidden="true"></i> {% get_hit_count for mahaliy_one %}</p>
                       <p>{{ mahaliy_one.body | truncatewords:5 }}</p>
                       </figure>
                     </li>
@@ -95,6 +105,7 @@
                 <li>
                   <div class="media wow fadeInDown"> <a href="{{mahaliy_new.get_absolute_url}}" class="media-left"> <img alt="" src="{{ mahaliy_new.image.url }}"> </a>
                     <div class="media-body"> <a href="{{mahaliy_new.get_absolute_url}}" class="catg_title">{{ mahaliy_new.title }}</a> </div>
+                   <p>Ko'rilganlar soni: <i class="fa fa-eye" aria-hidden="true"></i> {% get_hit_count for mahaliy_new %}</p>
                   </div>
                 </li>
                 {% endif %}
@@ -112,6 +123,7 @@
                   <li>
                     <figure class="bsbig_fig"> <a href="{{new.get_absolute_url}}" class="featured_img"> <img alt="" src="{{new.image.url}}"> <span class="overlay"></span> </a>
                       <figcaption> <a href="{{new.get_absolute_url}}">{{new.title}}</a> </figcaption>
+                       <p>Ko'rilganlar soni: <i class="fa fa-eye" aria-hidden="true"></i> {% get_hit_count for new %}</p>
                       <p>{{new.body | truncatewords:5}}</p>
                     </figure>
                   </li>
@@ -124,6 +136,7 @@
                   <li>
                     <div class="media wow fadeInDown"> <a href="{{new.get_absolute_url}}" class="media-left"> <img alt="" src="{{new.image.url}}"> </a>
                       <div class="media-body"> <a href="{{new.get_absolute_url}}" class="catg_title"> {{new.title}}</a> </div>
+                       <p>Ko'rilganlar soni: <i class="fa fa-eye" aria-hidden="true"></i> {% get_hit_count for new %}</p>
                     </div>
                   </li>
                   {% endif %}
@@ -152,6 +165,7 @@
                   <li>
                     <div class="media wow fadeInDown"> <a href="{{texnologiya.get_absolute_url}}" class="media-left"> <img alt="" src="{{texnologiya.image.url}}"></a>
                       <div class="media-body"> <a href="{{texnologiya.get_absolute_url}}" class="catg_title"> {{texnologiya.title}}</a> </div>
+                     <p>Ko'rilganlar soni: <i class="fa fa-eye" aria-hidden="true"></i> {% get_hit_count for texnologiya %}</p>
                     </div>
                   </li>
                   {% endif %}
@@ -204,6 +218,7 @@
                 <li>
                   <figure class="bsbig_fig  wow fadeInDown"> <a class="featured_img" href="{{sport.get_absolute_url}}"> <img src="{{sport.image.url}}" alt=""> <span class="overlay"></span> </a>
                     <figcaption> <a href="{{sport.get_absolute_url}}">{{sport.title}}</a> </figcaption>
+                     <p>Ko'rilganlar soni: <i class="fa fa-eye" aria-hidden="true"></i> {% get_hit_count for sport %}</p>
                     <p>{{sport.body | truncatewords:5}}</p>
                   </figure>
                 </li>
@@ -218,6 +233,7 @@
                 <li>
                   <div class="media wow fadeInDown"> <a href="{{sport.get_absolute_url}}" class="media-left"> <img alt="" src="{{sport.image.url}}"> </a>
                     <div class="media-body"> <a href="{{sport.get_absolute_url}}" class="catg_title"> {{sport.title}}</a> </div>
+                   <p>Ko'rilganlar soni: <i class="fa fa-eye" aria-hidden="true"></i> {% get_hit_count for sport %}</p>
                   </div>
                 </li>
                {% endif %}

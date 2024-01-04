@@ -1,0 +1,10 @@
+{% extends "news/base.html" %}
+{% block title %}Siz muvafiqiyatli royxatdan otiz{% endblock %}
+{% block content %}
+<body>
+<div class="container">
+    <h2>{{new_user.first_name}} Tabrikleymiz siz muvafiqiyatli royxatdan otiz</h2>
+    <p>Endi <a href="{% url 'login' %}">Login</a> qilsez boladi</p>
+</div>
+</body>
+{% endblock %}

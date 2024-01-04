@@ -34,6 +34,15 @@
           <li><a href="{% url 'siyosat_f' %}">Siyosat</a></li>
           <li><a href="{% url 'contact' %}">Contact Us</a></li>
           <li><a href="pages/404.html">404 Page</a></li>
+          {% if user.is_superuser %}
+           <li><a href="{% url 'admin_page' %}">Adminlar</a></li>
+          {% endif %}
+          <li>
+             <form method="get" action="{% url 'search_results' %}">
+            <input type="search" name="q" placeholder="Qidiruv...">
+          </form>
+          </li>
+
         </ul>
       </div>
     </nav>

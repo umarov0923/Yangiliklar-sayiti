@@ -1,0 +1,15 @@
+{% extends "news/base.html" %}
+{% block title %}Login sahifasi {% endblock %}
+{% block content %}
+<body>
+<div class="container">
+    <h2>{{news.title}}</h2>
+    <form method="post">{% csrf_token %}
+        {{form.as_p}}
+        <button type="submit">Kirish</button>
+    </form>
+    <a href="{% url 'password_reset' %}">Parolni unitizmi?</a> |
+    <a href="{% url 'user_register' %}"> Ro'yxatdan otish</a>
+</div>
+</body>
+{% endblock %}

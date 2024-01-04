@@ -1,0 +1,14 @@
+{% extends "news/base.html" %}
+{% block title %}Profilni almashtirish{% endblock %}
+{% block content %}
+<body>
+<div class="container">
+    <h2>Profilni almashtirish</h2>
+    <form method="post" enctype="multipart/form-data">{% csrf_token %}
+        {{user_form.as_p}}
+        {{profile.as_p}}
+        <button type="submit">O'zgarishlarni saqlash</button>
+    </form>
+</div>
+</body>
+{% endblock %}

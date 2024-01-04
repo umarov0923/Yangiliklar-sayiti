@@ -1,0 +1,15 @@
+{% extends "news/base.html" %}
+{% block title %}Yangilikni ochirish sahifa{% endblock %}
+{% block content %}
+<body>
+    <div class="container">
+        <h2>{{news.title}}</h2>
+        <p>{{news.title}} rostanxam shu sahifani ochirmoqchimisiz</p>
+        <img src="new.image.url" alt="">
+        <form method="post">{% csrf_token %}
+            <button type="submit"> O'chirish</button>
+        </form>
+    </div>
+
+</body>
+{% endblock %}
